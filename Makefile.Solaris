@@ -1,0 +1,74 @@
+# Makefile.Solaris -	for nicstat, Solaris platform Edition
+
+FILES =	nicstat
+
+SOURCES =	nicstat.c
+
+BINARY =	nicstat
+BINARIES =	$(BINARY)
+
+COPT =		-g -xO3
+#COPT =		-g
+
+# _REENTRANT gets us the declaration of strtok_r() on Solaris 9
+CFLAGS =	$(COPT) -D_REENTRANT `./dladm.sh def`
+
+LDLIBS =	-lsocket -lkstat -lrt `./dladm.sh lib`
+
+FILES =		nicstat
+
+SOURCES =	nicstat.c
+
+SU =		pfexec
+INSTALL =	$(SU) /usr/sbin/install -u root -g bin
+SETUINSTALL =	$(INSTALL)
+
+#--------------------------------
+
+FILES =	nicstat
+
+SOURCES =	nicstat.c
+
+BASEDIR =	/usr/local
+BINDIR =	$(BASEDIR)/bin
+MANDIR =	$(BASEDIR)/share/man
+MP_DIR =	$(BINDIR)
+
+BINARY =	nicstat
+NATIVE_BINARY =	`./nicstat.sh --bin-name`
+
+
+all : $(FILES)
+	mv $? $(NATIVE_BINARY)
+
+$(NATIVE_BINARY) : $(BINARY)
+	mv $? $@
+
+#-- Choose one of these two install methods:
+install : install_native install_man
+#install : install_multi_platform install_man
+
+install_native : $(BINARIES)
+	$(INSTALL) $(NATIVE_BINARY) $(BINDIR)/$(BINARY)
+#	$(INSTALL) -m 555 enicstat $(BINDIR)
+
+#
+# You may need to tweak the chown/chmod commands - all Linux
+# binaries need setuid-root if they are to use the SIOCETHTOOL ioctl
+# (which is optional, see the man page)
+#
+install_multi_platform : $(NATIVE_BINARY) enicstat
+	$(INSTALL) -m 755 nicstat.sh $(BINDIR)/nicstat
+	$(INSTALL) -m 555 enicstat $(BINDIR)
+	sudo cp -p .nicstat.* $(MP_DIR)
+	sudo chown root:bin $(MP_DIR)/.nicstat.Linux*
+	sudo chmod 4711 $(MP_DIR)/.nicstat.Linux*
+
+install_man: nicstat.1
+	$(INSTALL) -m 444 nicstat.1 $(MANDIR)/man1/nicstat.1
+
+lint :
+	lint $(SOURCES) $(LDLIBS)
+
+clean :
+	rm -f $(FILES)

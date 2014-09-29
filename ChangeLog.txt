@@ -1,0 +1,202 @@
+Version 1.95
+January 2014
+
+  Common
+
+      - Added "-U" option, to display separate read and write
+        utilization.
+
+      - Simplified display code regarding "-M" option.
+
+  Solaris
+
+      - Fixed fetch64() to check type of kstats
+
+Version 1.93
+January 2014
+
+  Solaris
+
+      - Fixed memory leak in update_nicdata_list()
+
+Version 1.92
+October 2012
+
+  Common
+
+      - Added "-M" option to change throughput statistics to Mbps
+        (Megabits per second).  Suggestion from Darren Todd.
+
+      - Fixed bugs with printing extended parseable format (-xp)
+
+      - Fixed man page's description of extended parseable output.
+
+  Solaris
+
+      - Fixed memory leak associated with g_getif_list
+
+      - Add 2nd argument to dladm_open() for Solaris 11.1
+
+      - Modify nicstat.sh to handle Solaris 11.1
+
+   Linux
+
+      - Modify nicstat.sh to see "x86_64" cputype as "i386".  All Linux
+	binaries are built as 32-bit, so we do not need to
+	differentiate these two cpu types.
+
+Version 1.90
+April 2011
+
+  Common
+
+      - nicstat.sh script, to provide for automated multi-platform
+        deployment.  See the Makefile's for details.
+
+      - Added "-x" flag, to display extended statistics for each
+        interface.
+
+      - Added "-t" and "-u" flags, to include TCP and UDP
+        (respectively) statistics.  These come from tcp:0:tcpstat and
+        udp:0:udpstat on Solaris, or from /proc/net/snmp and
+        /proc/net/netstat on Linux.
+
+      - Added "-a" flag, which equates to "-tux".
+
+      - Added "-l" flag, which lists interfaces and their
+        configuration.
+
+      - Added "-v" flag, which displays nicstat version.
+
+  Solaris
+
+      - Added use of libdladm.so:dladm_walk_datalink_id() to get list
+        of interfaces.  This is better than SIOCGLIFCONF, as it
+        includes interfaces given exclusively to a zone.
+
+        NOTE: this library/routine is linked with nicstat in "lazy"
+        mode, meaning that a Solaris 11 binary built with knowledge of
+        the routine will also run on Solaris 10 without failing when
+        the routine or library is not found - in this case nicstat
+        will fall back to the SIOGLIFCONF method.
+
+      - Added search of kstat "link_state" statistics as a third
+        method for finding active network interfaces.  See the man
+        page for details.
+
+  Linux
+
+      - Added support for SIOCETHTOOL ioctl, so that nicstat can look
+        up interface speed/duplex (i.e. "-S" flag not necessarily
+        needed any longer).
+
+      - Removed need for LLONG_MAX, improving Linux portability.
+
+Version 1.28c
+Feb 2010
+
+  Common
+
+      - Added "-p" flag, which produces "parseable" output.
+        Compatible with System Data Recorder (SDR).
+
+Version 1.21
+Oct 2009
+
+  Solaris
+
+      - Now works correctly on Shared-IP zones.
+
+Version 1.20
+Sep 2009
+
+      - Added support for a "fd" or "hd" (in reality anything starting
+	with an upper or lower-case F or H) suffix to the speed
+	settings supplied via the "-S" option. This advises nicstat
+	the interface is half-duplex or full-duplex. The Linux version
+	now calculates %Util the same way as the Solaris version.
+
+      - Added a script, enicstat, which uses ethtool to get speeds and
+        duplex modes for all interfaces, then calls nicstat with an
+        appropriate -S value.
+
+      - Made the Linux version more efficient.
+
+      - Combined the Solaris and Linux source into one nicstat.c. This
+        is a little ugly due to #ifdef's, but that's the price you
+        pay.
+
+      - Wrote a man page.
+
+      - Wrote better Makefile's for both platforms
+
+      - Wrote a short README
+
+      - Licensed nicstat under the Artistic License 2.0 
+
+Version 1.16
+Aug 2009
+
+	A colleague pointed out to me that nicstat's method of
+	calculating utilization for a full-duplex interface is not
+	correct.
+
+	Now nicstat will look for the kstat "link_duplex" value, and
+	if it is 2 (which means full-duplex), it will use the greater
+	of rbytes or wbytes to calculate utilization.
+
+Version 1.15
+Aug 2009
+
+	Merged Linux and Solaris versions.
+
+Jul 2009
+
+	A number of people have commented to me that nicstat always
+	reports "0.00" for %Util on Linux. The reason for this is that
+	there is no simple way an unprivileged user can get the speed
+	of an interface in Linux (quite happy for someone to prove me
+	wrong on that however).
+
+	Recently I got an offer of a patch from David Stone, to add an
+	option to nicstat that tells it what the speed of an interface
+	is. Pretty reasonable idea, so I have added it to the Linux
+	version. You will see this new "-S" option explained if you
+	use nicstat's "-h" (help) option.
+
+	I have made another change which makes nicstat more portable,
+	hence easier to build on Linux.
+
+Feb 2007
+
+	Wrote Linux version.
+
+Version 1.6
+Aug 2006
+
+	Added "-n" flag (non-local).
+
+	Added precision() function suggested by Brendan.
+	
+Version 1.5
+Aug 2006
+
+	Major re-write.  First use of SIOCGLIFCONF to get list of
+	active interfaces.
+
+Version 1.4
+Jul 2006
+
+	First version to use gethrtime() and nanosleep() on Solaris to
+	maintain better interval timing.  This technique was later
+	applied in CR 6611108.
+
+Some Version
+Sometime earlier than Jul 2006
+
+	First additions by Tim Cook.
+
+Older Versions
+Even Earlier
+
+	Original Perl and C versions by Brendan Gregg.
