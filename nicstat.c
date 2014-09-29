@@ -1588,6 +1588,9 @@ get_speed_duplex(nicdata_t *nicp)
 	struct ethtool_cmd edata;
 	int status;
 
+	if (find_interface_speed(nicp))
+		return;
+
 	if (nicp->flags & NIC_NO_GSET) {
 		if (nicp->speed > 0)
 			/* Already got something */
