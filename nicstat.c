@@ -2124,7 +2124,7 @@ print_stats()
 			 */
 			rutil = min(rbps * 800 / nicp->speed, 100);
 			wutil = min(wbps * 800 / nicp->speed, 100);
-			if (nicp->duplex == 2) {
+			if (nicp->duplex == DUPLEX_FULL) {
 				/* Full duplex */
 				util = max(rutil, wutil);
 			} else {
