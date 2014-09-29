@@ -9,8 +9,8 @@ The official, upstream repository for nicstat is at https://sourceforge.net/proj
 This fork
 =========
 
-This fork exists primarily to address some bugs in the upstream code
-(see https://sourceforge.net/p/nicstat/bugs/)
+This fork exists primarily to address some bugs in the upstream code. See
+[BUGS.md](BUGS.md) for a list of fixed bugs.
 
 The original, imported source is on the
 [upstream_1.95](https://github.com/scotte/nicstat/tree/upstream_1.95)
