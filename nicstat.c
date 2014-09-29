@@ -2427,17 +2427,10 @@ static char *
 duplex_to_string(duplex_t duplex)
 {
 	switch (duplex) {
-#ifdef OS_LINUX
 	case DUPLEX_HALF:
 		return ("half");
 	case DUPLEX_FULL:
 		return ("full");
-#else
-	case 1:
-		return ("half");
-	case 2:
-		return ("full");
-#endif
 	default:
 		return ("unkn");
 	}
