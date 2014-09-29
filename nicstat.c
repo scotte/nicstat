@@ -1609,7 +1609,7 @@ get_speed_duplex(nicdata_t *nicp)
 		get_speed_duplex(nicp);
 		return;
 	}
-	nicp->speed = edata.speed * 1000000;
+	nicp->speed = (long long) edata.speed * 1000000;
 	nicp->duplex = edata.duplex;
 }
 #endif /* OS_LINUX */
