@@ -1566,7 +1566,7 @@ load_snmp(FILE *snmp)
 			n = fscanf(snmp, "Udp: %lld %lld %lld %lld "
 			    "%lld %lld\n",
 			    &ll[0], &ll[1], &ll[2], &ll[3],
-			    &ll[4], &ll[5], &ll[6]);
+			    &ll[4], &ll[5]);
 			if (n == 6) {
 				g_udp_new->inDatagrams = ll[0];
 				g_udp_new->outDatagrams = ll[3];
