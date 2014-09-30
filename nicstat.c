@@ -281,7 +281,6 @@ static int g_udp;			/* show UDP stats */
 static int g_tcp;			/* show TCP stats */
 static int g_opt_x;
 static int g_opt_p;
-static int g_opt_k;
 static int g_verbose;
 static int g_forever;			/* run forever */
 static char **g_tracked;		/* tracked interfaces */
@@ -300,6 +299,7 @@ static char *g_wunit_2 = "WrKB";
 static int g_sock;			/* Socket for interface ioctl's */
 
 #ifdef OS_SOLARIS
+static int g_opt_k;
 static kstat_ctl_t *g_kc;		/* kstat chain pointer */
 static int g_new_kstat_chain = B_TRUE;	/* kstat chain updated */
 #ifdef USE_DLADM
@@ -2344,7 +2344,6 @@ init_if_speed_list(char *speed_list)
 	struct if_speed_list	*list_elem;
 	char			*speed_list_save_ptr;
 	char			*if_record;
-	char			*if_record_save_ptr;
 	char			name[32];
 	uint64_t		speed;
 	char			duplex_s[32];
