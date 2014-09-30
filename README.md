@@ -22,8 +22,9 @@ issue if any issues are found (or - even better - a pull request with a fix!).
 Thanks.
 
 If any changes are made to the upstream source, I will merge them in in an
-attempt to keep this tree in sync with upstream. Pull requests are welcome for
-any additional bugs of features as well.
+attempt to keep this tree in sync with upstream.
+
+Pull requests are welcome for any additional bugs or features as well.
 
 License
 =======
