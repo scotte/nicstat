@@ -43,3 +43,26 @@ I provided in that that bug report.
 
 An #ifdef for linux vs solaris is not needed as the DUPLEX_ #defines
 can be used consistently instead.
+
+Bug #6 - UDP stats scanf has too many arguments
+-----------------------------------------------
+
+This fixes http://sourceforge.net/p/nicstat/bugs/6/ by applying
+[the patch](https://github.com/scotte/nicstat/commit/d536743abb23fb1174b0f801a4eed7d9ceac4763)
+I provided in that that bug report.
+
+There were too many arguments to fscanf(), resulting in the following warning
+when compiling with -Wall:
+
+nicstat.c: In function ‘load_snmp’:
+nicstat.c:1569:8: warning: too many arguments for format [-Wformat-extra-args]
+
+Bug #7 - Remove unused variables
+--------------------------------
+
+This fixes http://sourceforge.net/p/nicstat/bugs/7/ by applying
+[the patch](https://github.com/scotte/nicstat/commit/f59393f19a4c7ca7c1dc8a873afe8cd6a1a4b036)
+I provided in that that bug report.
+
+There are two unused variables in Linux (one is used only for solaris,
+the other used nowhere), found when compiling with -Wall.
