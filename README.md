@@ -16,6 +16,11 @@ The original, imported source is on the
 [upstream_1.95](https://github.com/scotte/nicstat/tree/upstream_1.95)
 branch of this repository.
 
+This fork has only been tested on Linux. Reasonable effort has been made that
+it hasn't been broken in Solaris, but it is possible. Please create a Github
+issue if any issues are found (or - even better - a pull request with a fix!).
+Thanks.
+
 If any changes are made to the upstream source, I will merge them in in an
 attempt to keep this tree in sync with upstream. Pull requests are welcome for
 any additional bugs of features as well.
