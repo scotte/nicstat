@@ -29,7 +29,7 @@ Pull requests are welcome for any additional bugs or features as well.
 License
 =======
 
-nicstat is entirely the property of it's originators. All rights, restrictions,
+nicstat is entirely the property of its originators. All rights, restrictions,
 limitations, warranties, etc remain per nicstat's owners and license.
 
 nicstat is licensed under the Artistic License 2.0.  You can find a
