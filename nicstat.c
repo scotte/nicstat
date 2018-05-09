@@ -87,6 +87,7 @@
 #define	PROC_NET_NETSTAT_PATH	"/proc/net/netstat"
 #define	PROC_NET_BUFSIZ		(128 * 1024)
 #define	PROC_UPTIME		"/proc/uptime"
+#define UINT32_MAX		(4294967295U)
 /* Needs to be fixed if not built under ILP32 */
 typedef unsigned long long	uint64_t;
 typedef unsigned int		uint32_t;
