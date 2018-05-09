@@ -1814,8 +1814,17 @@ update_timestr(time_t *tptr)
 	(void) strftime(g_timestr, sizeof (g_timestr), "%H:%M:%S", tm);
 }
 
-#define	TCPSTAT(field)	(g_tcp_new->field - g_tcp_old->field)
-#define	UDPSTAT(field)	(g_udp_new->field - g_udp_old->field)
+static uint32_t
+tcpudpstat(uint32_t new, uint32_t old)
+{
+	if (new < old)
+		return((UINT32_MAX - old) + new);
+	else
+		return(new - old);
+}
+
+#define	TCPSTAT(field)	tcpudpstat(((g_tcp_new)->field), ((g_tcp_old)->field))
+#define	UDPSTAT(field)	tcpudpstat(((g_udp_new)->field), ((g_udp_old)->field))
 
 static void
 print_tcp()
